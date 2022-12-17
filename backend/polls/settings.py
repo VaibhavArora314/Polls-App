@@ -143,4 +143,4 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ALLOWED_ORIGINS = ["https://polls-app-two.vercel.app/"]
+CORS_ALLOW_ALL_ORIGINS = True

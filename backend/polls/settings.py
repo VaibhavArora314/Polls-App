@@ -142,3 +142,5 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
+
+CORS_ALLOWED_ORIGINS = ["https://polls-app-two.vercel.app/"]

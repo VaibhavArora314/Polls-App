@@ -146,4 +146,4 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "https://polls-app-two.vercel.app", "polls-app-vaibhav.vercel.app", "https://polls-app-git-master-vaibhav31.vercel.app"]
+    "https://polls-app-two.vercel.app", "https://polls-app-vaibhav.vercel.app", "https://polls-app-git-master-vaibhav31.vercel.app"]

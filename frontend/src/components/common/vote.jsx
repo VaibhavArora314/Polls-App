@@ -47,6 +47,7 @@ class Vote extends Form {
 
   doSubmit = async () => {
     try {
+      this.props.setIsOpen(false);
       if (this.state.changeVote) {
         await changeVote(
           this.props.poll.id,
@@ -61,7 +62,7 @@ class Vote extends Form {
         );
       }
       await this.props.updatePoll();
-      this.props.setIsOpen(false);
+      toast.success("Successfully Voted.");
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         this.context.logout();

@@ -84,12 +84,23 @@ WSGI_APPLICATION = 'polls.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DEVELOPMENT_SETTINGS
+# Uncomment these while running on your local machine
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     },
+# }
+
+# CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+
+# Production Settings
+# Comment these while running on your local machine
+
 DATABASES = {
-    'development': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'production': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DB_NAME'),
         'HOST': os.environ.get('DB_HOST'),
@@ -99,7 +110,11 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = DATABASES['development'] if DEBUG else DATABASES['production']
+CORS_ALLOWED_ORIGINS = [
+    "https://polls-app-two.vercel.app",
+    "https://polls-app-vaibhav.vercel.app",
+    "https://polls-app-git-master-vaibhav31.vercel.app",
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -155,9 +170,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
-
-CORS_ALLOWED_ORIGINS = [
-    "https://polls-app-two.vercel.app", "https://polls-app-vaibhav.vercel.app", "https://polls-app-git-master-vaibhav31.vercel.app", "http://localhost:3000"]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),

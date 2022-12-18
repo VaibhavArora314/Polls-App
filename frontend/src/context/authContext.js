@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }) => {
       setAuthTokens(data);
       localStorage.setItem("authTokens", JSON.stringify(data));
     } catch (ex) {
-      toast("Something went wrong while logging in");
       throw ex;
     }
   };
@@ -41,9 +40,7 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
-      console.log("Registered");
       await login(username, password);
-      console.log("Logged in");
     } catch (ex) {
       toast("Something unexpected occurred");
       throw ex;

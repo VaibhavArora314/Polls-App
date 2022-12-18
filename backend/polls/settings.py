@@ -85,7 +85,11 @@ WSGI_APPLICATION = 'polls.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'development': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'production': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DB_NAME'),
         'HOST': os.environ.get('DB_HOST'),
@@ -94,6 +98,8 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD'),
     }
 }
+
+DATABASES['default'] = DATABASES['development'] if DEBUG else DATABASES['production']
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -151,7 +157,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "https://polls-app-two.vercel.app", "https://polls-app-vaibhav.vercel.app", "https://polls-app-git-master-vaibhav31.vercel.app"]
+    "https://polls-app-two.vercel.app", "https://polls-app-vaibhav.vercel.app", "https://polls-app-git-master-vaibhav31.vercel.app", "http://localhost:3000"]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),

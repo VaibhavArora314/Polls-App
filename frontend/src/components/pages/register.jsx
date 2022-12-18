@@ -18,9 +18,9 @@ export default class Register extends Form {
   static contextType = AuthContext;
 
   schema = {
-    email: Joi.string().required().label("Email"),
-    username: Joi.string().required().label("Username"),
-    password: Joi.string().required().label("Password"),
+    email: Joi.string().required().label("Email").max(100).min(5),
+    username: Joi.string().required().label("Username").max(100).min(5),
+    password: Joi.string().required().label("Password").max(100).min(8),
   };
 
   doSubmit = async () => {
@@ -32,14 +32,16 @@ export default class Register extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
-        errors.username = ex.response.data;
+        console.log(errors);
+        console.log(ex.response);
+        errors.username = ex.response.data.username;
+        errors.email = ex.response.data.email;
+        errors.password = ex.response.data.password;
         this.setState({ errors });
-        toast.error("An error occurred");
       } else if (ex.response && ex.response.status === 401) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data.detail;
         this.setState({ errors });
-        toast.error("An error occurred");
       } else {
         toast.error("An unexpected error occured");
       }

@@ -30,14 +30,13 @@ export default class Login extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
-        errors.username = ex.response.data;
+        errors.username = ex.response.data.username;
+        errors.password = ex.response.data.password;
         this.setState({ errors });
-        toast.error("An error occurred");
       } else if (ex.response && ex.response.status === 401) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data.detail;
         this.setState({ errors });
-        toast.error("An error occurred");
       } else {
         toast.error("An unexpected error occured");
       }

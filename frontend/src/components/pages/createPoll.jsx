@@ -139,7 +139,7 @@ class CreatePoll extends Form {
             ))}
           </div>
           <div className="row">
-            <div className="col-9">
+            <div className="col-md-8">
               <button
                 disabled={this.state.optionCount == this.maxOptionCount}
                 onClick={this.addOption}
@@ -155,10 +155,10 @@ class CreatePoll extends Form {
                 Remove Option
               </button>
             </div>
-            <div className="col-3 text-end">
+            <div className="col-md-4 text-md-end">
               <button
                 disabled={this.validate()}
-                className="btn btn-primary m-2 me-0"
+                className="btn btn-primary m-2 mx-0"
               >
                 Submit
               </button>

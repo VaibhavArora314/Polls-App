@@ -94,8 +94,6 @@ WSGI_APPLICATION = 'polls.wsgi.application'
 #     },
 # }
 
-# CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
-
 # Production Settings
 # Comment these while running on your local machine
 
@@ -114,6 +112,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://polls-app-two.vercel.app",
     "https://polls-app-vaibhav.vercel.app",
     "https://polls-app-git-master-vaibhav31.vercel.app",
+    "http://localhost:3000"
 ]
 
 # Password validation

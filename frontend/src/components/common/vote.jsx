@@ -4,6 +4,7 @@ import { getVoteData, vote, changeVote } from "../../services/voteService";
 import Joi from "joi";
 import AuthContext from "../../context/authContext";
 import { toast } from "react-toastify";
+import Loading from "./loading";
 
 class Vote extends Form {
   state = {
@@ -13,6 +14,7 @@ class Vote extends Form {
     errors: "",
     changeVote: false,
     originalVote: null,
+    loading: true,
   };
 
   static contextType = AuthContext;
@@ -31,6 +33,7 @@ class Vote extends Form {
         data: { optionId: option.id },
         changeVote: true,
         originalVote: option.id,
+        loading: false,
       });
     } catch (ex) {
       console.log(ex);
@@ -42,12 +45,13 @@ class Vote extends Form {
       } else {
         toast.error("An unexpected errror occured!");
       }
+      this.setState({ loading: false });
     }
   };
 
   doSubmit = async () => {
     try {
-      this.props.setIsOpen(false);
+      this.setState({ loading: true });
       if (this.state.changeVote) {
         await changeVote(
           this.props.poll.id,
@@ -62,6 +66,7 @@ class Vote extends Form {
         );
       }
       await this.props.updatePoll();
+      this.props.setIsOpen(false);
       toast.success("Successfully Voted.");
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
@@ -70,17 +75,20 @@ class Vote extends Form {
       } else {
         toast.error("An unexpected errror occured!");
       }
+      this.setState({ loading: false });
     }
   };
 
   render() {
+    if (this.state.loading) return <Loading height="20" />;
+
     return (
       <form onSubmit={this.handleSubmit}>
         {this.renderSelect("optionId", "Options", this.props.poll.options)}
         <button
           disabled={
             (!this.state.originalVote &&
-              this.state.data.optionId == this.state.originalVote) ||
+              Number(this.state.data.optionId) == this.state.originalVote) ||
             this.validate()
           }
           className="btn btn-primary my-1"

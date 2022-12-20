@@ -4,6 +4,7 @@ import Form from "../common/form";
 import Joi from "joi";
 import AuthContext from "../../context/authContext";
 import { toast } from "react-toastify";
+import Loading from "../common/loading";
 
 class CreatePoll extends Form {
   state = {
@@ -17,6 +18,7 @@ class CreatePoll extends Form {
     optionCount: 2,
     optionsUpdated: false,
     errors: {},
+    loading: false,
   };
 
   maxOptionCount = 8;
@@ -51,6 +53,7 @@ class CreatePoll extends Form {
 
   doSubmit = async () => {
     try {
+      this.setState({ loading: true });
       const { description, liveResults, timePeriod } = this.state.data;
       let options = [];
       for (let key in this.state.data) {
@@ -72,6 +75,7 @@ class CreatePoll extends Form {
       } else {
         toast.error("An unexpected errror occured!");
       }
+      this.setState({ loading: false });
     }
   };
 
@@ -125,6 +129,8 @@ class CreatePoll extends Form {
   };
 
   render() {
+    if (this.state.loading) return <Loading height="60" />;
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

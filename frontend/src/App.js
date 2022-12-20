@@ -13,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <div className="container">
+    <div className="container min-vh-100">
       <AuthProvider>
         <NavBar />
         <Switch>

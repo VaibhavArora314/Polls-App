@@ -4,6 +4,7 @@ import AuthContext from "../../context/authContext";
 import Form from "../common/form";
 import Joi from "joi";
 import { toast } from "react-toastify";
+import Loading from "../common/loading";
 
 export default class Register extends Form {
   state = {
@@ -13,6 +14,7 @@ export default class Register extends Form {
       password: "",
     },
     errors: {},
+    loading: false,
   };
 
   static contextType = AuthContext;
@@ -25,6 +27,7 @@ export default class Register extends Form {
 
   doSubmit = async () => {
     try {
+      this.setState({ loading: true });
       const { username, email, password } = this.state.data;
       await this.context.register(username, email, password);
       const { state } = this.props.location;
@@ -45,10 +48,13 @@ export default class Register extends Form {
       } else {
         toast.error("An unexpected error occured");
       }
+      this.setState({ loading: false });
     }
   };
 
   render() {
+    if (this.state.loading) return <Loading height="60" />;
+
     if (this.context.user && this.context.user.user_id)
       return <Redirect to="/" />;
 

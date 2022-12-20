@@ -6,6 +6,7 @@ import Item from "../common/item";
 import Pagination from "../common/pagination";
 import SearchField from "../common/searchField";
 import ListGroup from "../common/listGroup";
+import Loading from "../common/loading";
 
 function PollsList(props) {
   const [polls, setPolls] = useState([]);
@@ -36,11 +37,11 @@ function PollsList(props) {
     async function getPolls() {
       const { data } = await pollService.getPolls();
       setPolls(data);
+      if (loading) setLoading(false);
     }
 
     if (loading) {
       getPolls();
-      setLoading(false);
     }
 
     const interval = setInterval(getPolls, 30 * 1000);
@@ -48,7 +49,7 @@ function PollsList(props) {
     return () => clearInterval(interval);
   }, [polls, loading]);
 
-  if (loading) return;
+  if (loading) return <Loading height="60" />;
 
   let filteredData = polls;
   if (searchQuery) {

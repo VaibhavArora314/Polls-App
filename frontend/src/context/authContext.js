@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import httpService from "../services/httpService";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+import Loading from "../components/common/loading";
 
 const AuthContext = createContext();
 
@@ -98,6 +99,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={contextData}>
+      {loading && <Loading height="60" />}
       {!loading && children}
     </AuthContext.Provider>
   );

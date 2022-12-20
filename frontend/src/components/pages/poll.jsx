@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import Vote from "../common/vote";
 import { VerticalChart } from "../common/verticalChart";
 import { BarChart } from "../common/barChart";
+import Loading from "../common/loading";
 
 Modal.setAppElement("#root");
 
@@ -41,17 +42,18 @@ function Poll(props) {
       try {
         const { data } = await pollService.getPoll(pollId);
         setPoll(data);
+        if (loading) setLoading(false);
       } catch (ex) {
         if (ex.response.status === 404) {
           console.log("Poll not found");
           setPoll(null);
         }
+        if (loading) setLoading(false);
       }
     }
 
     if (loading) {
       getPoll();
-      setLoading(false);
     }
 
     const interval = setInterval(getPoll, 30 * 1000);
@@ -60,6 +62,8 @@ function Poll(props) {
       clearInterval(interval);
     };
   }, [poll, loading]);
+
+  if (loading) return <Loading height="60" />;
 
   const optionColours = ["primary", "secondary", "success", "info", "warning"];
 

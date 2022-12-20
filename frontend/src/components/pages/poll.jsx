@@ -110,7 +110,7 @@ function Poll(props) {
         <div className="row m-5">
           {((poll && poll.live_results) || poll.ended) && (
             <React.Fragment>
-              <div className="col-md-8 col-sm-12 my-1 h-100">
+              <div className="col-md-8 col-sm-12 my-1 d-md-block d-none">
                 <VerticalChart
                   dataToShow={poll.options}
                   label="Votes"
@@ -126,7 +126,7 @@ function Poll(props) {
                   labelField="description"
                   dataField="votes_count"
                 />
-                <p className="text-center">Bar Chart</p>
+                <p className="text-center">Pie Chart</p>
               </div>
             </React.Fragment>
           )}

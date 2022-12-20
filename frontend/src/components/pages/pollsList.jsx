@@ -129,8 +129,8 @@ function PollsList(props) {
 
   return (
     <React.Fragment>
-      <div className="row">
-        <div className="col">
+      <div className="row m-1">
+        <div className="col-12 col-md-9 col-sm-7">
           <div className="row">
             <div className="col">
               <SearchField
@@ -161,7 +161,7 @@ function PollsList(props) {
             currentPage={currentPage}
           />
         </div>
-        <div className="col-3">
+        <div className="col-md-3 col-sm-4 d-sm-block d-none">
           <span className="m-1 mt-0">
             <ListGroup
               items={states}
@@ -169,6 +169,7 @@ function PollsList(props) {
               valueProperty="value"
               selectedItem={selectedState}
               onItemSelect={(item) => {
+                if (item.value === "ended") setSortingQuery("");
                 setSelectedState(item.value);
                 setCurrentPage(1);
               }}

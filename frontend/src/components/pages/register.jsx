@@ -57,13 +57,13 @@ export default class Register extends Form {
         <h3>Register</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="col-4">
+            <div className="col-lg-4 col-md-6">
               {this.renderInput("username", "Username")}
             </div>
-            <div className="col-4">
+            <div className="col-lg-4 col-md-6">
               {this.renderInput("email", "Email", "email")}
             </div>
-            <div className="col-4">
+            <div className="col-lg-4 col-md-6">
               {this.renderInput("password", "Password", "password")}
             </div>
           </div>

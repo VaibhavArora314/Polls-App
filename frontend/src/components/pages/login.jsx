@@ -52,10 +52,10 @@ export default class Login extends Form {
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="col-6">
+            <div className="col-md-6">
               {this.renderInput("username", "Username")}
             </div>
-            <div className="col-6">
+            <div className="col-md-6">
               {this.renderInput("password", "Password", "password")}
             </div>
           </div>

@@ -77,7 +77,7 @@ function Poll(props) {
               />
             ))}
             <div className="row">
-              <div className="col-auto">
+              <div className="col-md-4 col-sm-12">
                 <p>Created By: {poll.username}</p>
                 <p>
                   Total Votes:{" "}
@@ -86,10 +86,10 @@ function Poll(props) {
                     : 0}
                 </p>
               </div>
-              <div className="col">
-                <p className="m-1 text-center">Status: {poll.time_left}</p>
+              <div className="col-md-4 col-sm-12">
+                <p className="m-1 text-start">Status: {poll.time_left}</p>
               </div>
-              <div className="col-auto me-auto text-end p-0">
+              <div className="col-md-4 col-sm-12 text-end p-0">
                 {user && user.user_id && !poll.ended && (
                   <button
                     className="btn btn-primary m-1"
@@ -110,7 +110,7 @@ function Poll(props) {
         <div className="row m-5">
           {((poll && poll.live_results) || poll.ended) && (
             <React.Fragment>
-              <div className="col-8 my-1">
+              <div className="col-md-8 col-sm-12 my-1 h-100">
                 <VerticalChart
                   dataToShow={poll.options}
                   label="Votes"
@@ -119,7 +119,7 @@ function Poll(props) {
                 />
                 <p className="text-center">Vertical Chart</p>
               </div>
-              <div className="col-auto my-1">
+              <div className="col-md-4 col-sm-12 my-1">
                 <BarChart
                   dataToShow={poll.options}
                   label="Votes"

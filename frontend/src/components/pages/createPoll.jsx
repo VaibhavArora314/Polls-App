@@ -19,6 +19,8 @@ class CreatePoll extends Form {
     errors: {},
   };
 
+  maxOptionCount = 8;
+
   static contextType = AuthContext;
 
   schema = {
@@ -86,7 +88,7 @@ class CreatePoll extends Form {
 
   addOption = () => {
     const { optionCount } = this.state;
-    if (optionCount == 7) return;
+    if (optionCount == this.maxOptionCount) return;
     let { data } = this.state;
     data = { ...data, [`option${optionCount + 1}`]: "" };
     this.schema = {
@@ -129,15 +131,17 @@ class CreatePoll extends Form {
           {this.renderInput("description", "Description")}
           {this.renderCheck("liveResults", "Live Results")}
           {this.renderInput("timePeriod", "Time Period (No of days)", "number")}
-          {[...Array(this.state.optionCount).keys()].map((num) => (
-            <span key={num}>
-              {this.renderInput(`option${num + 1}`, `Option ${num + 1}`)}
-            </span>
-          ))}
+          <div className="row">
+            {[...Array(this.state.optionCount).keys()].map((num) => (
+              <div className="col-md-6" key={num}>
+                {this.renderInput(`option${num + 1}`, `Option ${num + 1}`)}
+              </div>
+            ))}
+          </div>
           <div className="row">
             <div className="col-9">
               <button
-                disabled={this.state.optionCount == 7}
+                disabled={this.state.optionCount == this.maxOptionCount}
                 onClick={this.addOption}
                 className="btn btn-primary m-2 ms-0"
               >

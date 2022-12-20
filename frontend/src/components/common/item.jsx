@@ -11,13 +11,15 @@ function Item({ poll }) {
         </div>
       </div>
       <div className="row">
-        <div className="col-auto text-start">
-          <p className="m-0 p-1 px-0">Created by {poll.username}</p>
+        <div className="col-6">
+          <div className="col-auto text-start me-2">
+            <p className="m-0 p-1 px-0">Created by {poll.username}</p>
+          </div>
+          <div className="col-auto text-start">
+            <p className="m-0 p-1 px-0">Status: {poll.time_left}</p>
+          </div>
         </div>
-        <div className="col-auto text-center">
-          <p className="m-0 p-1 px-0">Status: {poll.time_left}</p>
-        </div>
-        <div className="col-auto ms-auto text-end">
+        <div className="col-6 ms-auto text-end mb-1">
           <Link to={"/polls/" + poll.id} className="btn btn-primary">
             View
           </Link>
